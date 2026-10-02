@@ -1,18 +1,355 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-# Other files and folders
-.settings/
+<title>Untuk Kamu ❤️</title>
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+<style>
+* {
+    box-sizing: border-box;
+}
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff416c, #ff4b8b, #8e44ad);
+}
+
+.card {
+    width: 92%;
+    max-width: 430px;
+    padding: 30px 22px;
+    text-align: center;
+    background: rgba(255,255,255,0.96);
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 10;
+}
+
+.heart {
+    font-size: 70px;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+h1 {
+    color: #ff3860;
+}
+
+p {
+    color: #555;
+    line-height: 1.7;
+}
+
+h2 {
+    color: #333;
+}
+
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 25px;
+    margin: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.next {
+    background: #ff3860;
+    color: white;
+}
+
+.yes {
+    background: #25D366;
+    color: white;
+}
+
+.no {
+    background: #ddd;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.floating-heart {
+    position: fixed;
+    top: -50px;
+    z-index: 1;
+    animation: jatuh linear forwards;
+}
+
+@keyframes jatuh {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+#typing {
+    min-height: 80px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="heart">❤️</div>
+
+    <!-- HALAMAN 1 -->
+    <div id="page1">
+
+        <h1>Hai Kamu 😊</h1>
+
+        <p id="typing"></p>
+
+        <button class="next" onclick="page2()">
+            Lanjut 💕
+        </button>
+
+    </div>
+
+
+    <!-- HALAMAN 2 -->
+    <div id="page2" class="hidden">
+
+        <h1>Aku Mau Jujur...</h1>
+
+        <p>
+            Ada sesuatu yang sudah lama ingin aku
+            sampaikan.
+            <br><br>
+
+            Aku nyaman ngobrol sama kamu.
+            Aku suka perhatian kamu.
+            Dan tanpa sadar...
+            aku mulai suka sama kamu. ❤️
+        </p>
+
+        <button class="next" onclick="page3()">
+            Teruskan 💌
+        </button>
+
+    </div>
+
+
+    <!-- HALAMAN 3 -->
+    <div id="page3" class="hidden">
+
+        <h1>Satu Pertanyaan...</h1>
+
+        <p>
+            Setelah semua yang aku rasakan,
+            akhirnya aku berani bertanya:
+        </p>
+
+        <h2>
+            Maukah kamu jadi pacarku? ❤️
+        </h2>
+
+        <button class="yes" onclick="diterima()">
+            IYA ❤️
+        </button>
+
+        <button class="no" id="noButton" onclick="lari()">
+            TIDAK 😭
+        </button>
+
+    </div>
+
+
+    <!-- HASIL -->
+    <div id="success" class="hidden">
+
+        <div class="heart">🥰</div>
+
+        <h1>YEAY! ❤️</h1>
+
+        <p>
+            Terima kasih sudah menerima aku.
+            <br><br>
+            Sekarang kirim jawabanmu
+            lewat WhatsApp. 💚
+        </p>
+
+        <button class="yes" onclick="kirimWhatsApp()">
+            💬 KIRIM KE WHATSAPP
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   EFEK MENGETIK
+========================= */
+
+const teks =
+"Hai... sebenarnya ada sesuatu yang ingin aku sampaikan kepadamu. Tolong baca sampai selesai ya ❤️";
+
+let posisi = 0;
+
+function mengetik() {
+
+    if (posisi < teks.length) {
+
+        document.getElementById("typing").innerHTML +=
+            teks.charAt(posisi);
+
+        posisi++;
+
+        setTimeout(mengetik, 35);
+    }
+}
+
+mengetik();
+
+
+/* =========================
+   PINDAH HALAMAN
+========================= */
+
+function page2() {
+
+    document.getElementById("page1")
+        .classList.add("hidden");
+
+    document.getElementById("page2")
+        .classList.remove("hidden");
+}
+
+
+function page3() {
+
+    document.getElementById("page2")
+        .classList.add("hidden");
+
+    document.getElementById("page3")
+        .classList.remove("hidden");
+}
+
+
+/* =========================
+   JAWABAN IYA
+========================= */
+
+function diterima() {
+
+    document.getElementById("page3")
+        .classList.add("hidden");
+
+    document.getElementById("success")
+        .classList.remove("hidden");
+
+    for (let i = 0; i < 60; i++) {
+
+        setTimeout(buatHati, i * 70);
+
+    }
+}
+
+
+/* =========================
+   ANIMASI HATI
+========================= */
+
+function buatHati() {
+
+    const hati = document.createElement("div");
+
+    hati.className = "floating-heart";
+
+    const emoji = [
+        "❤️",
+        "💕",
+        "💖",
+        "💗",
+        "💘",
+        "🥰"
+    ];
+
+    hati.innerHTML =
+        emoji[Math.floor(Math.random() * emoji.length)];
+
+    hati.style.left =
+        Math.random() * 100 + "vw";
+
+    hati.style.fontSize =
+        (15 + Math.random() * 30) + "px";
+
+    hati.style.animationDuration =
+        (2 + Math.random() * 4) + "s";
+
+    document.body.appendChild(hati);
+
+    setTimeout(() => {
+        hati.remove();
+    }, 6000);
+}
+
+
+/* =========================
+   TOMBOL TIDAK
+========================= */
+
+function lari() {
+
+    const tombol =
+        document.getElementById("noButton");
+
+    const x =
+        Math.random() * 220 - 110;
+
+    const y =
+        Math.random() * 160 - 80;
+
+    tombol.style.transform =
+        `translate(${x}px, ${y}px)`;
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function kirimWhatsApp() {
+
+    // Nomor WhatsApp kamu
+    const nomor = "6285382653365";
+
+    const pesan =
+`Aku mau kok jadi pacar kamu😆🫰`;
+
+    const link =
+        "https://wa.me/" +
+        nomor +
+        "?text=" +
+        encodeURIComponent(pesan);
+
+    // Buka WhatsApp
+    window.location.href = link;
+}
+
+</script>
+
+</body>
+</html>
